@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Create the users table -->
+    <changeSet id="3" author="Jemis">
+        <createTable tableName="users">
+            <column name="user_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="gender" type="VARCHAR(50)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="bio" type="VARCHAR(255)"/>
+            <column name="user_image" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="privacy" type="BOOLEAN" defaultValue="false"/>
+            <column name="following_users" type="BIGINT[]"/>
+            <column name="follower_users" type="BIGINT[]"/>
+            <column name="saved_post" type="BIGINT[]"/>
+            <column name="available_theme" type="BIGINT[]"/>
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="modified_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="current_theme" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create a sequence for user_id -->
+    <changeSet id="4" author="Jemis">
+        <createSequence sequenceName="users_seq"
+                        incrementBy="1" minValue="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Add foreign key for current_theme -->
+    <changeSet id="5" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="users"
+                baseColumnNames="current_theme"
+                constraintName="fk_users_current_theme"
+                referencedTableName="themes"
+                referencedColumnNames="theme_id"/>
+    </changeSet>
+
+    <!-- Add foreign key for role -->
+    <changeSet id="6" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="users"
+                baseColumnNames="role_id"
+                constraintName="fk_users_role"
+                referencedTableName="role"
+                referencedColumnNames="role_id"/>
+    </changeSet>
+
+</databaseChangeLog>

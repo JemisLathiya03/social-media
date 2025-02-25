@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet id="2" author="Jemis">
+
+        <!-- Creating the themes table -->
+        <createTable tableName="themes">
+            <column name="theme_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="theme_name" type="VARCHAR(255)"/>
+            <column name="primary_color" type="VARCHAR(50)"/>
+            <column name="secondary_color" type="VARCHAR(50)"/>
+            <column name="background_color" type="VARCHAR(50)"/>
+            <column name="text_color" type="VARCHAR(50)"/>
+            <column name="sub_background_color" type="VARCHAR(50)"/>
+            <column name="sub_text_color" type="VARCHAR(50)"/>
+            <column name="button_background_color" type="VARCHAR(50)"/>
+            <column name="button_text_color" type="VARCHAR(50)"/>
+            <column name="anchor_text_color" type="VARCHAR(50)"/>
+            <column name="text_field_color" type="VARCHAR(50)"/>
+            <column name="created_user" type="BIGINT"/>
+            <column name="modification" type="BOOLEAN" defaultValueBoolean="false"/>
+
+            <!-- PostgreSQL array column -->
+            <column name="granted_users" type="BIGINT[]"/>
+
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="modified_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+
+        <createSequence sequenceName="theme_seq"
+                        incrementBy="1" minValue="1" startValue="1"/>
+
+    </changeSet>
+
+</databaseChangeLog>

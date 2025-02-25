@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <include file="/db/changelog/initial-schema/create-table/role-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/themes-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/user-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/access-api-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/role-access-api-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/chat-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/chat-group-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/chat-users-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/follow-request-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/message-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/post-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/post-content-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/post-comment-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/reel-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/reel-comment-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/story-table.xml"></include>
+    <include file="/db/changelog/initial-schema/create-table/email-verification-table.xml"></include>
+    <include file="/db/changelog/initial-schema/update-table/user-table.xml"></include>
+    <include file="/db/changelog/initial-schema/insert-table/role-table.xml"></include>
+    <include file="/db/changelog/initial-schema/insert-table/themes-table.xml"></include>
+
+
+</databaseChangeLog>

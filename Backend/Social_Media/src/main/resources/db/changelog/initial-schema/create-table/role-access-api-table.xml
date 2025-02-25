@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Create the role_access_api table -->
+    <changeSet id="9" author="Jemis">
+        <createTable tableName="role_access_api">
+            <column name="role_access_api_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT"/>
+            <column name="access_api_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create a sequence for role_access_api_id -->
+    <changeSet id="10" author="Jemis">
+        <createSequence sequenceName="role_access_api_seq"
+                        incrementBy="1" minValue="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Add foreign key constraint for role -->
+    <changeSet id="11" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="role_access_api"
+                baseColumnNames="role_id"
+                constraintName="fk_role_access_api_role"
+                referencedTableName="role"
+                referencedColumnNames="role_id"/>
+    </changeSet>
+
+    <!-- Add foreign key constraint for access_api -->
+    <changeSet id="12" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="role_access_api"
+                baseColumnNames="access_api_id"
+                constraintName="fk_role_access_api_access_api"
+                referencedTableName="access_api"
+                referencedColumnNames="access_api_id"/>
+    </changeSet>
+
+</databaseChangeLog>

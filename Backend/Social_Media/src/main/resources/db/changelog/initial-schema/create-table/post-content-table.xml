@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <!-- Create the post_content table -->
+    <changeSet id="34" author="Jemis">
+        <createTable tableName="post_content">
+            <column name="post_content_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="post_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_content_path" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create a sequence for post_content_id -->
+    <changeSet id="35" author="Jemis">
+        <createSequence sequenceName="post_content_seq" incrementBy="1" minValue="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Add foreign key constraints -->
+    <changeSet id="36" author="Jemis">
+        <!-- Foreign key constraint for post_id in post_content -->
+        <addForeignKeyConstraint
+                baseTableName="post_content"
+                baseColumnNames="post_id"
+                constraintName="fk_post_content_post"
+                referencedTableName="post"
+                referencedColumnNames="post_id"/>
+    </changeSet>
+
+</databaseChangeLog>

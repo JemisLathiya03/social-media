@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Create the message table -->
+    <changeSet id="27" author="Jemis">
+        <createTable tableName="message">
+            <column name="chat_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="chat" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="is_edited" type="BOOLEAN"/>
+            <column name="message_reaction" type="VARCHAR(255)"/>
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="modified_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create a sequence for message ID -->
+    <changeSet id="28" author="Jemis">
+        <createSequence sequenceName="chat_seq"
+                        incrementBy="1" minValue="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Add foreign key constraint for chat -->
+    <changeSet id="29" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="message"
+                baseColumnNames="chat"
+                constraintName="fk_message_chat"
+                referencedTableName="chat"
+                referencedColumnNames="chat_id"/>
+    </changeSet>
+
+    <!-- Add foreign key constraint for created_by (references users table) -->
+    <changeSet id="30" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="message"
+                baseColumnNames="created_by"
+                constraintName="fk_message_created_by"
+                referencedTableName="users"
+                referencedColumnNames="user_id"/>
+    </changeSet>
+
+</databaseChangeLog>

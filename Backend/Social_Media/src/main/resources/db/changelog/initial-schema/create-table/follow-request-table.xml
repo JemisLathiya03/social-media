@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Create the follow_request table -->
+    <changeSet id="23" author="Jemis">
+        <createTable tableName="follow_request">
+            <column name="follow_request_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="requested_user" type="BIGINT" />
+            <column name="target_user" type="BIGINT" />
+            <column name="request_status" type="BOOLEAN"/>
+            <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="modified_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create a sequence for follow_request_id -->
+    <changeSet id="24" author="Jemis">
+        <createSequence sequenceName="follow_request_seq"
+                        incrementBy="1" minValue="1" startValue="1"/>
+    </changeSet>
+
+    <!-- Add foreign key constraint for requested_user (references users table) -->
+    <changeSet id="25" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="follow_request"
+                baseColumnNames="requested_user"
+                constraintName="fk_follow_request_requested_user"
+                referencedTableName="users"
+                referencedColumnNames="user_id"/>
+    </changeSet>
+
+    <!-- Add foreign key constraint for target_user (references users table) -->
+    <changeSet id="26" author="Jemis">
+        <addForeignKeyConstraint
+                baseTableName="follow_request"
+                baseColumnNames="target_user"
+                constraintName="fk_follow_request_target_user"
+                referencedTableName="users"
+                referencedColumnNames="user_id"/>
+    </changeSet>
+
+</databaseChangeLog>
